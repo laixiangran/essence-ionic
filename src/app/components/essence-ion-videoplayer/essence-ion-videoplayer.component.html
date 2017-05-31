@@ -1,0 +1,34 @@
+<div class="videoViewerContainer" [style.width]="width + 'px'" #videoViewerContainer>
+	<div class="videoViewer" [style.min-height]="video.offsetHeight + 'px'">
+		<video #video [width]="width" [poster]="poster"
+			(click)="playOrPause()"
+			(loadedmetadata)="onLoadedmetadata($event)" 
+			(ended)="OnEnded($event)"
+		 	(timeupdate)="onTimeupdate($event)" 
+		 	(progress)="onProgress($event)"
+		 	(canplaythrough)="onCanplaythrough($event)"
+			(canplay)="onCanPlay($event)"
+			(playing)="onPlaying($event)"
+			(waiting)="onWaiting($event)"
+			(error)="onError($event)"
+		 	(play)="onPlay($event)">
+			<source [src]="videoUrl" type="video/mp4"/>
+		</video>
+		<div *ngIf="video.paused && video.networkState != 3" tappable (click)="playOrPause()">
+			<span class="fa" [ngClass]="{'fa-repeat': video.ended, 'fa-play-circle-o': !video.ended}"></span>
+			<span class="time">{{currentTime}}/{{totalTime}}</span>
+		</div>
+		<div *ngIf="!canPlay">
+			<span class="fa fa-circle-o-notch fa-spin loading"></span>
+		</div>
+		<div *ngIf="video.networkState === 3 && canPlay" tappable (click)="reload(video)">
+			<span class="fa fa-refresh"></span>
+			<span class="reload_info">视频加载失败！</span>
+		</div>
+	</div>
+	<div class="videoToolbar" #videoToolbar>
+		<div class="videoToolbar_progress">
+			<div class="videoToolbar_play_progress" [style.width]="play_progress + 'px'"></div>
+		</div>
+	</div>
+</div>

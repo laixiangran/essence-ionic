@@ -1,0 +1,18 @@
+/**
+ * Created by laixiangran on 2016/7/2
+ * homepage：http://www.laixiangran.cn
+ */
+
+page-videoplayer {
+
+    ion-content {
+        div.videoDiv {
+            padding: 10px 10px 0 10px;
+
+            &:last-child {
+                padding-bottom: 10px;
+            }
+        }
+    }
+}
+

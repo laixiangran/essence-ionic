@@ -1,0 +1,10 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>视频播放器</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<div class="videoDiv" #videoDiv *ngFor="let url of videos;">
+		<essence-ion-videoplayer (ready)="videoViewerReady($event)" [source]="url" [width]="videoDiv.offsetWidth - 20" [poster]="'assets/images/post.png'"></essence-ion-videoplayer>
+	</div>
+</ion-content>

@@ -1,0 +1,8 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title>高德地图</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content>
+	<essence-ion-amap [options]="amapOpts" (ready)="amapReady($event)" (destroy)="amapDestroy($event)"></essence-ion-amap>
+</ion-content>

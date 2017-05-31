@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "es5",
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"noEmitHelpers": false,
+		"noImplicitAny": false,
+		"sourceMap": true,
+		"declaration": true,
+		"rootDir": "aot",
+		"outDir": "dist",
+		"lib": [
+			"es6",
+			"dom"
+		],
+		"typeRoots": [
+			"./node_modules/@types"
+		]
+	},
+	"files": [
+		"aot/index.ts"
+	],
+	"angularCompilerOptions": {
+		"genDir": "./aot/factories"
+	}
+}

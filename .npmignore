@@ -1,0 +1,16 @@
+.idea/
+.gitignore
+tsconfig.json
+tsconfig-publish.json
+tslint.json
+.npmignore
+.editorconfig
+aot/
+hooks
+resources
+src
+www
+config.xml
+gulpfile.js
+ionic.config.json
+
