@@ -146,7 +146,9 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * 播放/暂停
      */
     playOrPause() {
-        (this.videoElem && this.videoElem.paused) ? this.play() : this.pause();
+        if (this.videoElem) {
+            this.videoElem.paused ? this.play() : this.pause();
+        }
     }
 
     /**
