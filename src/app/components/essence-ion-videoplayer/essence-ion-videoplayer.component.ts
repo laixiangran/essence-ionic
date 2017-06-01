@@ -122,7 +122,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onError(e: any) {
-        console.error('error');
+        console.error(e);
     }
 
     /**

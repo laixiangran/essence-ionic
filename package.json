@@ -9,6 +9,21 @@
 		"videoplayer",
 		"laixiangran"
 	],
+	"homepage": "https://github.com/laixiangran/essence-ionic#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/laixiangran/essence-ionic.git"
+	},
+	"author": {
+		"name": "赖祥燃",
+		"email": "laixiangran@163.com",
+		"bolg": "http://www.cnblogs.com/laixiangran",
+		"homepage": "http://www.laixiangran.cn"
+	},
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/laixiangran/essence-ionic/issues"
+	},
 	"scripts": {
 		"prepublish": "gulp prepublish && ngc -p tsconfig-publish.json",
 		"prestart": "npm run prepublish",
@@ -16,12 +31,6 @@
 		"add": "ionic cordova platform android",
 		"device": "ionic cordova run android",
 		"build": "ionic cordova build android --release --prod"
-	},
-	"author": {
-		"name": "赖祥燃",
-		"email": "laixiangran@163.com",
-		"bolg": "http://www.cnblogs.com/laixiangran",
-		"homepage": "http://www.laixiangran.cn"
 	},
 	"module": "dist/index.js",
 	"typings": "dist/index.d.ts",
