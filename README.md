@@ -113,6 +113,16 @@ This is ionic custom components.
 
 - `ready($event)` - 视频播放器初始化完成事件，参数$event为当前EssenceIonVideoplayerComponent实例对象
 
+- `videoPlay($event)` - 视频播放开发事件
+
+- `videoPause($event)` - 视频播放暂停事件
+
+- `videoEnded($event)` - 视频播放结束事件
+
+- `videoPan($event)` - 视频滑动快进/退事件
+
+- `videoError($event)` - 视频播放错误事件
+
 # License
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)

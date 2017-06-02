@@ -14,13 +14,21 @@ export class VideoplayerPage {
 
     constructor() {
         this.videos = [
-            'http://www.laixiangran.cn/CDN/custom/video/test6.mp4',
             'http://www.laixiangran.cn/CDN/custom/video/test.mp4',
-            'http://www.laixiangran.cn/CDN/custom/video/test.mp4'
+            'http://www.laixiangran.cn/CDN/custom/video/test.mp4',
+            'http://www.laixiangran.cn/CDN/custom/video/test2.mp4'
         ];
     }
 
-    videoViewerReady($event: any) {
+    onVideoReady($event: any) {
+        console.log($event);
+    }
+
+    onVideoPan($event: any) {
+        // console.log($event);
+    }
+
+    onVideoError($event: any) {
         console.log($event);
     }
 }

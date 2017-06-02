@@ -10,6 +10,15 @@ $playBtnSize: 40px;
     .videoViewer {
         position: relative;
 
+        .panTime {
+            display: inline-block;
+            color: #FFFFFF;
+            position: absolute;
+            left: 1px;
+            bottom: 2px;
+            font-size: 10px;
+        }
+
         div {
             position: absolute;
             top: 0;

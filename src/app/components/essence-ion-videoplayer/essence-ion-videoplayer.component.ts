@@ -15,18 +15,29 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 export class EssenceIonVideoplayerComponent implements OnInit {
 
     @ViewChild('videoToolbar') videoToolbar: ElementRef;
+
     @Input() width: number = 0;
     @Input() height: number = 0;
     @Input() source: string;
     @Input() poster: string;
-    @Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 
-    videoElem: HTMLVideoElement;
+    @Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
+    @Output() videoPlay: EventEmitter<any> = new EventEmitter<any>(false);
+    @Output() videoPause: EventEmitter<any> = new EventEmitter<any>(false);
+    @Output() videoEnded: EventEmitter<any> = new EventEmitter<any>(false);
+    @Output() videoPan: EventEmitter<any> = new EventEmitter<any>(false);
+    @Output() videoError: EventEmitter<any> = new EventEmitter<any>(false);
+
+    videoElem: HTMLVideoElement; // video元素
     videoUrl: SafeResourceUrl; // 视频路径
     currentTime: string = '00:00:00'; // 视频播放的当前时间
     totalTime: string = '00:00:00'; // 视频总时间
     play_progress: number = 0; // 播放的进度条长度值
     canPlay: boolean = true; // false：加载中，true：可以播放
+    durationFor1px: number; // 屏幕1px等于的时长
+    coefficient: number = 1; // 快进/退系数
+    isPan: boolean = false; // 视频是否在快进/退
+    prevPoint: any; // 上次快进/退屏幕点位置
 
     constructor(public domSanitizer: DomSanitizer) {
     }
@@ -44,6 +55,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
         this.videoElem = e.target as HTMLVideoElement;
         this.totalTime = this.getFormatTime(this.videoElem.duration);
         this.currentTime = this.getFormatTime(this.videoElem.currentTime);
+        this.durationFor1px = this.videoElem.duration/this.videoToolbar.nativeElement.clientWidth;
     }
 
     /**
@@ -52,7 +64,6 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      */
     onCanPlay(e: any) {
         this.canPlay = true;
-        console.log('can play');
     }
 
     /**
@@ -60,7 +71,15 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onPlay(e: any) {
-        console.log('play');
+        this.videoPlay.emit(e);
+    }
+
+    /**
+     * 当视频已经暂停时
+     * @param e
+     */
+    onPause(e: any) {
+        this.videoPause.emit(e);
     }
 
     /**
@@ -69,24 +88,22 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      */
     onPlaying(e: any) {
         this.canPlay = false;
-        console.log('playing');
     }
 
     /**
-     *    当视频由于需要缓冲下一帧而停止
+     * 当视频由于需要缓冲下一帧而停止
      * @param e
      */
     onWaiting(e: any) {
         this.canPlay = false;
-        console.log('waiting');
     }
 
     /**
      * 当目前的播放列表已结束时
      * @param e
      */
-    OnEnded(e: any) {
-        console.log('play end');
+    onEnded(e: any) {
+        this.videoEnded.emit(e);
     }
 
     /**
@@ -94,8 +111,15 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onTimeupdate(e: any) {
+        this.canPlay = true;
+        this.caleProgress();
+    }
+
+    /**
+     * 重新计算播放进度，修改当前时间及进度条
+     */
+    caleProgress() {
         if (this.videoElem) {
-            this.canPlay = true;
             this.currentTime = this.getFormatTime(this.videoElem.currentTime);
             this.play_progress = this.videoElem.currentTime / this.videoElem.duration * this.videoToolbar.nativeElement.clientWidth;
         }
@@ -106,7 +130,6 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onProgress(e: any) {
-        console.log('progress');
     }
 
     /**
@@ -114,7 +137,6 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onCanplaythrough(e: any) {
-        console.log('canplaythrough');
     }
 
     /**
@@ -122,7 +144,29 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param e
      */
     onError(e: any) {
-        console.error(e);
+        this.videoError.emit(e);
+    }
+
+    /**
+     * video滑动事件
+     * @param e
+     */
+    onPan(e: any) {
+        this.isPan = true;
+        if (this.prevPoint) {
+            let deltaX: number = e.deltaX - this.prevPoint.deltaX;
+            this.videoElem.currentTime += (this.coefficient * this.durationFor1px * deltaX);
+            if (this.videoElem.currentTime >= 0 && this.videoElem.currentTime <= this.videoElem.duration) {
+                this.caleProgress();
+            }
+        }
+        if (e.isFinal) {
+            this.prevPoint = null;
+            this.isPan = false;
+        } else {
+            this.prevPoint = e;
+        }
+        this.videoPan.emit(e);
     }
 
     /**

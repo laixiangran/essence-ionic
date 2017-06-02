@@ -10,8 +10,9 @@ import { VideoplayerPage } from "./pages/videoplayer/videoplayer";
 export class AppComponent {
     @ViewChild(Nav) nav: Nav;
 
-    rootPage = HomePage;
-    // rootPage = VideoplayerPage;
+    // rootPage = HomePage;
+    rootPage = VideoplayerPage;
+
     pages: any[];
 
     constructor(public platform: Platform) {
