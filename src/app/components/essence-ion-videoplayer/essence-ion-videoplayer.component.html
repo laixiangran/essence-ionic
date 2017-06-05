@@ -16,12 +16,12 @@
 		       (play)="onPlay($event)">
 			<source [src]="videoUrl" type="video/mp4"/>
 		</video>
-		<div *ngIf="video.paused && video.networkState != 3" (tap)="playOrPause()">
+		<div *ngIf="video.paused && video.networkState != 3 && !isPan" (tap)="playOrPause()">
 			<span class="fa" [ngClass]="{'fa-repeat': video.ended, 'fa-play-circle-o': !video.ended}"></span>
-			<span class="time">{{currentTime}}/{{totalTime}}</span>
+			<span class="time">{{getFormatTime(video.currentTime)}}/{{getFormatTime(video.duration)}}</span>
 		</div>
-		<span *ngIf="isPan" class="panTime">{{currentTime}}</span>
-		<div *ngIf="!canPlay && !isPan">
+		<span *ngIf="isPan" class="panTime">{{getFormatTime(video.currentTime)}}</span>
+		<div *ngIf="!canPlay && !isPan" (tap)="playOrPause()">
 			<span class="fa fa-circle-o-notch fa-spin loading"></span>
 		</div>
 		<div *ngIf="video.networkState === 3 && canPlay" (tap)="reload(video)">

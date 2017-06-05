@@ -1,6 +1,6 @@
 {
 	"name": "essence-ionic",
-	"version": "1.0.7",
+	"version": "1.0.9",
 	"description": "This is ionic custom components.",
 	"keywords": [
 		"angular2",
@@ -28,7 +28,7 @@
 		"prepublish": "gulp prepublish && ngc -p tsconfig-publish.json",
 		"prestart": "npm run prepublish",
 		"start": "ionic-app-scripts serve",
-		"add": "ionic cordova platform android",
+		"add": "ionic cordova platform add android",
 		"device": "ionic cordova run android",
 		"build": "ionic cordova build android --release --prod"
 	},

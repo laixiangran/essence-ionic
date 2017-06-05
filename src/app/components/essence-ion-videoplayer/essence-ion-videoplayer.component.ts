@@ -30,11 +30,8 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 
     videoElem: HTMLVideoElement; // video元素
     videoUrl: SafeResourceUrl; // 视频路径
-    currentTime: string = '00:00:00'; // 视频播放的当前时间
-    totalTime: string = '00:00:00'; // 视频总时间
     play_progress: number = 0; // 播放的进度条长度值
     canPlay: boolean = true; // false：加载中，true：可以播放
-    durationFor1px: number; // 屏幕1px等于的时长
     coefficient: number = 1; // 快进/退系数
     isPan: boolean = false; // 视频是否在快进/退
     prevPoint: any; // 上次快进/退屏幕点位置
@@ -53,9 +50,6 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      */
     onLoadedmetadata(e: any) {
         this.videoElem = e.target as HTMLVideoElement;
-        this.totalTime = this.getFormatTime(this.videoElem.duration);
-        this.currentTime = this.getFormatTime(this.videoElem.currentTime);
-        this.durationFor1px = this.videoElem.duration/this.videoToolbar.nativeElement.clientWidth;
     }
 
     /**
@@ -120,7 +114,6 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      */
     caleProgress() {
         if (this.videoElem) {
-            this.currentTime = this.getFormatTime(this.videoElem.currentTime);
             this.play_progress = this.videoElem.currentTime / this.videoElem.duration * this.videoToolbar.nativeElement.clientWidth;
         }
     }
@@ -153,16 +146,19 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      */
     onPan(e: any) {
         this.isPan = true;
+        this.pause();
         if (this.prevPoint) {
             let deltaX: number = e.deltaX - this.prevPoint.deltaX;
-            this.videoElem.currentTime += (this.coefficient * this.durationFor1px * deltaX);
-            if (this.videoElem.currentTime >= 0 && this.videoElem.currentTime <= this.videoElem.duration) {
+            this.videoElem.currentTime += (this.coefficient * deltaX);
+            if (this.videoElem.currentTime > 0 && this.videoElem.currentTime < this.videoElem.duration) {
                 this.caleProgress();
             }
         }
         if (e.isFinal) {
             this.prevPoint = null;
             this.isPan = false;
+            this.canPlay = true;
+            this.play();
         } else {
             this.prevPoint = e;
         }
@@ -212,16 +208,20 @@ export class EssenceIonVideoplayerComponent implements OnInit {
      * @param value
      */
     getFormatTime(value: number): string {
-        let h: string = parseInt(value / 3600 + '') < 10 ? '0' + parseInt(value / 3600 + '') : '' + parseInt(value / 3600 + ''),
-            m: string = parseInt(value % 3600 / 60 + '') < 10 ? '0' + parseInt(value % 3600 / 60 + '') : '' + parseInt(value % 3600 / 60 + ''),
-            s: string;
-        if (value >= 60) {
-            s = value % 3600 % 60 < 10 ? '0' + parseInt(value % 3600 % 60 + '') : '' + parseInt(value % 3600 % 60 + '');
-        } else if (value < 60 && value >= 10) {
-            s = '' + parseInt(value + '');
-        } else if (value < 10) {
-            s = '0' + parseInt(value + '');
+        if (value) {
+            let h: string = parseInt(value / 3600 + '') < 10 ? '0' + parseInt(value / 3600 + '') : '' + parseInt(value / 3600 + ''),
+                m: string = parseInt(value % 3600 / 60 + '') < 10 ? '0' + parseInt(value % 3600 / 60 + '') : '' + parseInt(value % 3600 / 60 + ''),
+                s: string;
+            if (value >= 60) {
+                s = value % 3600 % 60 < 10 ? '0' + parseInt(value % 3600 % 60 + '') : '' + parseInt(value % 3600 % 60 + '');
+            } else if (value < 60 && value >= 10) {
+                s = '' + parseInt(value + '');
+            } else if (value < 10) {
+                s = '0' + parseInt(value + '');
+            }
+            return `${h}:${m}:${s}`;
+        } else {
+            return '00:00:00';
         }
-        return `${h}:${m}:${s}`;
     }
 }

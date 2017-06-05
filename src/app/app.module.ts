@@ -6,9 +6,9 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { AppComponent } from './app.component';
 // page
 import { HomePage } from "./pages/home/home";
-import { EssenceIonicModule } from "../../dist/essence-ionic.module";
 import { AmapPage } from "./pages/amap/amap";
 import { VideoplayerPage } from "./pages/videoplayer/videoplayer";
+import { EssenceIonicModule } from "./components/essence-ionic.module";
 
 @NgModule({
     imports: [
