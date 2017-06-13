@@ -15,7 +15,7 @@ import { EssenceIonAMapTransformService } from "./essence-ion-amap-transform.ser
 @Component({
     selector: "essence-ion-amap",
     templateUrl: "./essence-ion-amap.component.html",
-    styleUrls: ['./essence-ion-amap.component.scss'],
+    // styleUrls: ['./essence-ion-amap.component.scss'],
     providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
@@ -99,10 +99,10 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 
     /**
      * 设置地图范围
-     * 
-     * @param {number[]} southWest 
-     * @param {number[]} northEast 
-     * 
+     *
+     * @param {number[]} southWest
+     * @param {number[]} northEast
+     *
      * @memberof EssenceNg2AMapComponent
      */
     setBounds(southWest: number[], northEast: number[]) {
@@ -222,9 +222,9 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
                     this.map.setZoomAndCenter(this.locationZoom, aPosition);
                     if (this.showLocationMarker) {
                         this.locationMarker = this.createMarker({
-                            icon: this.creatIcon({
-                                image: './assets/img/map/loc.png'
-                            }),
+                            // icon: this.creatIcon({
+                            //     image: './assets/img/map/loc.png'
+                            // }),
                             position: aPosition
                         });
                         this.locationMarker.setMap(this.map);
