@@ -15,7 +15,7 @@ import { EssenceIonAMapTransformService } from "./essence-ion-amap-transform.ser
 @Component({
     selector: "essence-ion-amap",
     templateUrl: "./essence-ion-amap.component.html",
-    styleUrls: ['./essence-ion-amap.component.scss'],
+    // styleUrls: ['./essence-ion-amap.component.scss'],
     providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {

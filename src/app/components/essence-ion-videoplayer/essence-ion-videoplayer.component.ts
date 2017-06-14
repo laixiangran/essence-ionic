@@ -10,7 +10,7 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 @Component({
 	selector: 'essence-ion-videoplayer',
 	templateUrl: './essence-ion-videoplayer.component.html',
-	styleUrls: ['./essence-ion-videoplayer.component.scss']
+	// styleUrls: ['./essence-ion-videoplayer.component.scss']
 })
 export class EssenceIonVideoplayerComponent implements OnInit {
 
