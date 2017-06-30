@@ -25,6 +25,7 @@
 		"url": "https://github.com/laixiangran/essence-ionic/issues"
 	},
 	"scripts": {
+		"release": "gulp prepublish && ngc -p tsconfig-publish.json && npm publish",
 		"start": "ionic-app-scripts serve",
 		"add": "ionic cordova platform add android",
 		"resources": "ionic cordova resources android",
