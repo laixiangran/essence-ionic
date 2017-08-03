@@ -30,6 +30,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     initZoom: number;
     initCenter: any;
     vertrefresh: number = 10;
+    eAMap: any;
 
     @ViewChild("amap") elRef: ElementRef;
     @Input() options: Object;
@@ -50,7 +51,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
     constructor(
         private http: Http,
         private transformService: EssenceIonAMapTransformService) {
-
+        this.eAMap = window['AMap'];
     }
 
     ngOnInit() {
@@ -66,9 +67,9 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * 初始化地图
 	 */
     initMap() {
-        if (window['AMap']) {
-            this.map = new AMap.Map(this.elRef.nativeElement, this.options);
-            this.trafficTileLayer = new AMap.TileLayer.Traffic({
+        if (this.eAMap) {
+            this.map = new this.eAMap.Map(this.elRef.nativeElement, this.options);
+            this.trafficTileLayer = new this.eAMap.TileLayer.Traffic({
                 map: this.map,
                 autoRefresh: true,
                 interval: this.vertrefresh
@@ -106,7 +107,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
      * @memberof EssenceNg2AMapComponent
      */
     setBounds(southWest: number[], northEast: number[]) {
-        let bounds: any = new AMap.Bounds(southWest, northEast)
+        let bounds: any = new this.eAMap.Bounds(southWest, northEast)
         this.map.setBounds(bounds);
         this.initZoom = this.map.getZoom();
         this.initCenter = this.map.getCenter();
@@ -118,7 +119,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
      * @returns {AMap.Marker}
      */
     createMarker(markerOptions: any): any {
-        return new AMap.Marker(markerOptions);
+        return new this.eAMap.Marker(markerOptions);
     }
 
 	/**
@@ -127,11 +128,11 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * @returns {AMap.Icon}
 	 */
     creatIcon(iconOptions: any): any {
-        return new AMap.Icon(iconOptions);
+        return new this.eAMap.Icon(iconOptions);
     }
 
     creatPixel(x: Number, y: Number): any {
-        return new AMap.Pixel(x, y);
+        return new this.eAMap.Pixel(x, y);
     }
 
 	/**
@@ -141,7 +142,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * @returns {AMap.Size}
 	 */
     creatSize(width: number, height: number): any {
-        return new AMap.Size(width, height);
+        return new this.eAMap.Size(width, height);
     }
 
     /**

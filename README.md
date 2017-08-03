@@ -97,6 +97,10 @@ This is ionic custom components.
 
 - `location($event)` - 地图定位成功事件，参数$event为{code，info, result}
 
+### Properties
+
+- `eAMap`（`any`） - 高德地图对象AMap
+
 ### essence-ion-videoplayer
 
 #### Inputs
