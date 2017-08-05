@@ -8,28 +8,26 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from 'ionic-angular';
 import { EssenceIonAMapComponent } from './essence-ion-amap/essence-ion-amap.component';
 import { EssenceIonVideoplayerComponent } from './essence-ion-videoplayer/essence-ion-videoplayer.component';
+import { EssenceIonCalendarComponent } from './essence-ion-calendar/essence-ion-calendar.component';
+
+const components: any[] = [
+	EssenceIonVideoplayerComponent,
+	EssenceIonAMapComponent,
+	EssenceIonCalendarComponent
+];
 
 @NgModule({
 	imports: [
 		CommonModule,
 		IonicModule
 	],
-	declarations: [
-		EssenceIonVideoplayerComponent,
-		EssenceIonAMapComponent
-	],
-	entryComponents: [
-		EssenceIonVideoplayerComponent,
-		EssenceIonAMapComponent
-	],
-	exports: [
-		EssenceIonVideoplayerComponent,
-		EssenceIonAMapComponent
-	]
+	declarations: components,
+	entryComponents: components,
+	exports: components
 })
 export class EssenceIonicModule {
 
-	static initAMapAPI(config: {apiKey: string}) {
+	static initAMapAPI(config: { apiKey: string }) {
 		const head = document.getElementsByTagName('head')[0],
 			script = document.createElement('script');
 		script.type = 'text/javascript';

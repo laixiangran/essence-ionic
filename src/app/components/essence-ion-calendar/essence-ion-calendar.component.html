@@ -1,0 +1,31 @@
+<div class="essence-ion-calendar">
+	<div class="calendar-header">
+		<span style="display: inline-block;">
+			<ion-datetime displayFormat="YYYY-MM" [(ngModel)]="currentDate"></ion-datetime>
+		</span>
+		<button ion-button round outline small (click)="backToday()">回到本月</button>
+	</div>
+	<div class="calendar-content" #calendarContent>
+		<div class="week">
+			<ul>
+				<li *ngFor="let week of weekData;"
+					[style.width]="calendarContent.offsetWidth / 7 + 'px'"
+					[style.line-height]="calendarContent.offsetWidth / 7 + 'px'"
+					[style.height]="calendarContent.offsetWidth / 7 + 'px'">
+					<span>{{week}}</span>
+				</li>
+			</ul>
+		</div>
+		<div class="day">
+			<ul>
+				<li *ngFor="let monthData of calendarData.monthData;"
+					[ngClass]="{disable: isNotSameMonth(monthData.year, monthData.month), currDay: isCurrDay(monthData.year, monthData.month, monthData.day)}"
+					[style.width]="calendarContent.offsetWidth / 7 + 'px'"
+					[style.line-height]="calendarContent.offsetWidth / 7 + 'px'"
+					[style.height]="calendarContent.offsetWidth / 7 + 'px'">
+					<span>{{monthData.day}}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

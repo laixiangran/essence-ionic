@@ -3,6 +3,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { HomePage } from './pages/home/home';
 import { AmapPage } from './pages/amap/amap';
 import { VideoplayerPage } from './pages/videoplayer/videoplayer';
+import { CalendarPage } from './pages/calendar/calendar';
 
 @Component({
 	templateUrl: 'app.html'
@@ -19,7 +20,8 @@ export class AppComponent {
 
 		this.pages = [
 			{ name: 'essence-ion-amap', component: AmapPage },
-			{ name: 'essence-ion-videoplayer', component: VideoplayerPage }
+			{ name: 'essence-ion-videoplayer', component: VideoplayerPage },
+			{ name: 'essence-ion-calendar', component: CalendarPage }
 		];
 	}
 

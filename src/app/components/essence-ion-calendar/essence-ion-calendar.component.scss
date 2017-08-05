@@ -1,0 +1,65 @@
+.essence-ion-calendar {
+
+	$baseColor: #666666;
+	$borderBaseColor: #DDDDDD;
+	$todayColor: #DD464C;
+	$disableColor: #BBBBBB;
+
+	ul, li {
+		list-style: none;
+		overflow: hidden;
+		margin: 0;
+		padding: 0;
+	}
+
+	.calendar-header {
+
+	}
+
+	.calendar-content {
+		box-shadow: 0 2px 2px 0 $disableColor;
+
+		ul {
+			border-top: 1px solid $borderBaseColor;
+			li {
+				position: relative;
+				float: left;
+				text-align: center;
+				border-bottom: 1px solid $borderBaseColor;
+				border-right: 1px solid $borderBaseColor;
+				color: $baseColor;
+
+				&:nth-child(7n+1) {
+					border-left: 1px solid $borderBaseColor;
+				}
+			}
+		}
+
+		.week {
+
+			ul {
+				background-color: #e1e6ea;
+				li {
+					font-size: 1.4rem;
+					font-weight: bold;
+					color: #535353;
+				}
+			}
+		}
+
+		.day {
+			ul {
+				li {
+					&.currDay {
+						color: $todayColor;
+					}
+
+					&.disable {
+						color: $disableColor;
+					}
+				}
+			}
+		}
+	}
+}
+

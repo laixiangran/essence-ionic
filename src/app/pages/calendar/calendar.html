@@ -1,0 +1,15 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>日历组件</ion-title>
+	</ion-navbar>
+</ion-header>
+<ion-content padding>
+	<essence-ion-calendar (onAddSchedule)="onAddSchedule($event)"
+						  (onViewAllSchedule)="onViewAllSchedule($event)"
+						  (onViewSchedule)="onViewSchedule($event)"
+						  (dateChange)="onDateChange($event)">
+	</essence-ion-calendar>
+</ion-content>

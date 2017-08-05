@@ -9,6 +9,7 @@ import { HomePage } from './pages/home/home';
 import { AmapPage } from './pages/amap/amap';
 import { VideoplayerPage } from './pages/videoplayer/videoplayer';
 import { EssenceIonicModule } from './components/essence-ionic.module';
+import { CalendarPage } from './pages/calendar/calendar';
 
 @NgModule({
 	imports: [
@@ -30,14 +31,16 @@ import { EssenceIonicModule } from './components/essence-ionic.module';
 		AppComponent,
 		HomePage,
 		AmapPage,
-		VideoplayerPage
+		VideoplayerPage,
+		CalendarPage
 	],
 	bootstrap: [IonicApp],
 	entryComponents: [
 		AppComponent,
 		HomePage,
 		AmapPage,
-		VideoplayerPage
+		VideoplayerPage,
+		CalendarPage
 	],
 	providers: [
 		{ provide: ErrorHandler, useClass: IonicErrorHandler }
