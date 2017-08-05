@@ -3,13 +3,14 @@
  * homepage：http://www.laixiangran.cn
  */
 
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'page-home',
-    templateUrl: "home.html"
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
 export class HomePage {
 
-    constructor() {}
+	constructor() {
+	}
 }

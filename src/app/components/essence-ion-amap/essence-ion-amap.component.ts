@@ -3,14 +3,15 @@
  * homepage：http://www.laixiangran.cn
  * 高德地图组件类
  */
-import { Observable } from 'rxjs/Observable';
-
 declare let AMap: any;
 
 import { Component, OnInit, OnDestroy, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { EssenceIonAMapTransformService } from './essence-ion-amap-transform.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Component({
 	selector: 'essence-ion-amap',
@@ -19,20 +20,20 @@ import { EssenceIonAMapTransformService } from './essence-ion-amap-transform.ser
 	providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
-	private map: any;
-	private convertAPI = 'http://restapi.amap.com/v3/assistant/coordinate/convert?key=0df36377c23e75585d4ed4fcb4baf807';
-	private tempLocation: any = null;
-	private locationMarker: any;
-	private locationZoom: number = 16;
-	private isStartLocation: boolean = false;
-	private trafficTileLayer: any;
-	private isShowTraffic: boolean = false;
+	map: any;
+	convertAPI: string;
+	tempLocation: any = null;
+	locationMarker: any;
+	locationZoom: number = 16;
+	isStartLocation: boolean = false;
+	trafficTileLayer: any;
+	isShowTraffic: boolean = false;
 	initZoom: number;
 	initCenter: any;
 	vertrefresh: number = 10;
 	eAMap: any;
-
 	@ViewChild('amap') elRef: ElementRef;
+	@Input() apiKey: string;
 	@Input() options: Object;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
@@ -55,13 +56,20 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	@Output() destroy: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() location: EventEmitter<any> = new EventEmitter<any>(false);
 
-	constructor(private http: Http,
-				private transformService: EssenceIonAMapTransformService) {
-		this.eAMap = window['AMap'];
-	}
+	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		this.initMap();
+		this.eAMap = window['AMap'];
+		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${this.apiKey}`;
+		if (this.eAMap) {
+			this.initMap();
+		} else {
+			this.addAmapScript().then(() => {
+				this.initMap();
+			}).catch((err: any) => {
+				throw err;
+			});
+		}
 	}
 
 	ngOnDestroy() {
@@ -75,27 +83,45 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * 初始化地图
 	 */
 	initMap() {
-		if (this.eAMap) {
-			this.map = new this.eAMap.Map(this.elRef.nativeElement, this.options);
-			this.trafficTileLayer = new this.eAMap.TileLayer.Traffic({
-				map: this.map,
-				autoRefresh: true,
-				interval: this.vertrefresh
-			});
-			if (this.isShowTraffic) {
-				this.trafficTileLayer.show();
-			} else {
-				this.trafficTileLayer.hide();
-			}
-			if (this.showCurrentLocation) {
-				this.currentLocation();
-			}
-			this.initZoom = this.map.getZoom();
-			this.initCenter = this.map.getCenter();
-			this.map.on('complete', () => {
-				this.ready.emit(this);
-			});
+		this.eAMap = window['AMap'];
+		this.map = new this.eAMap.Map(this.elRef.nativeElement, this.options);
+		this.trafficTileLayer = new this.eAMap.TileLayer.Traffic({
+			map: this.map,
+			autoRefresh: true,
+			interval: this.vertrefresh
+		});
+		if (this.isShowTraffic) {
+			this.trafficTileLayer.show();
+		} else {
+			this.trafficTileLayer.hide();
 		}
+		if (this.showCurrentLocation) {
+			this.currentLocation();
+		}
+		this.initZoom = this.map.getZoom();
+		this.initCenter = this.map.getCenter();
+		this.map.on('complete', () => {
+			this.ready.emit(this);
+		});
+	}
+
+	/**
+	 * 动态添加高德地图api
+	 */
+	addAmapScript(): Promise<any> {
+		return new Promise((resolve, reject) => {
+			const head = document.getElementsByTagName('head')[0],
+				script = document.createElement('script');
+			script.type = 'text/javascript';
+			script.src = `http://webapi.amap.com/maps?v=1.3&key=${this.apiKey}`;
+			head.appendChild(script);
+			script.onload = () => {
+				resolve();
+			};
+			script.onerror = (err: any) => {
+				reject(err);
+			}
+		});
 	}
 
 	/**

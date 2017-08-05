@@ -81,7 +81,9 @@ This is ionic custom components.
 
 #### Inputs
 
-- `options`（`Object`） - 地图初始化参数对象，[参数详情](http://lbs.amap.com/api/javascript-api/reference/map)
+- `apiKey`（`string`）- （必需）高德地图API Key
+
+- `options`（`?Object`） - 地图初始化参数对象，[参数详情](http://lbs.amap.com/api/javascript-api/reference/map)
 
 - `showCurrentLocation`（`?boolean=false`） - 是否显示定位按钮，true为显示
 

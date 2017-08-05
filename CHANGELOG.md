@@ -1,3 +1,7 @@
+# 1.1.1（2017-08-05）
+
+- 新增 essence-ion-amap：新增apiKey输入属性，需要传入高德地图API key
+
 # 1.1.0（2017-08-03）
 
 - 新增 essence-ion-amap：EssenceIonAMapComponent实例暴露属性eAMap，方便外面调用
