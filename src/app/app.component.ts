@@ -11,7 +11,6 @@ export class AppComponent {
 	@ViewChild(Nav) nav: Nav;
 
 	rootPage = HomePage;
-	// rootPage = AmapPage;
 
 	pages: any[];
 

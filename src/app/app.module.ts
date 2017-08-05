@@ -24,7 +24,7 @@ import { EssenceIonicModule } from './components/essence-ionic.module';
 			tabsPlacement: 'bottom',
 			pageTransition: 'ios'
 		}),
-		EssenceIonicModule
+		EssenceIonicModule.initAMapAPI({apiKey: '92876784ab731cccce8ebd5a8030290f'})
 	],
 	declarations: [
 		AppComponent,

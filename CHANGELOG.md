@@ -1,6 +1,6 @@
 # 1.1.1（2017-08-05）
 
-- 新增 essence-ion-amap：新增apiKey输入属性，需要传入高德地图API key
+- 新增 EssenceIonicModule新增静态方法initAMapAPI，用于初始化高德地图API
 
 # 1.1.0（2017-08-03）
 

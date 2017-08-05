@@ -16,12 +16,13 @@ import 'rxjs/add/operator/catch';
 @Component({
 	selector: 'essence-ion-amap',
 	templateUrl: './essence-ion-amap.component.html',
-	styleUrls: ['./essence-ion-amap.component.scss'],
+	// styleUrls: ['./essence-ion-amap.component.scss'],
 	providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	map: any;
 	convertAPI: string;
+	AMapAPI: string;
 	tempLocation: any = null;
 	locationMarker: any;
 	locationZoom: number = 16;
@@ -32,8 +33,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	initCenter: any;
 	vertrefresh: number = 10;
 	eAMap: any;
+	static apiKey: string;
 	@ViewChild('amap') elRef: ElementRef;
-	@Input() apiKey: string;
 	@Input() options: Object;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
@@ -59,16 +60,20 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		this.eAMap = window['AMap'];
-		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${this.apiKey}`;
-		if (this.eAMap) {
-			this.initMap();
-		} else {
-			this.addAmapScript().then(() => {
+		if (EssenceIonAMapComponent.apiKey) {
+			this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.apiKey}`;
+			this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
+			if (window['AMap']) {
 				this.initMap();
-			}).catch((err: any) => {
-				throw err;
-			});
+			} else {
+				this.addAmapScript().then(() => {
+					this.initMap();
+				}).catch((err: any) => {
+					throw err;
+				});
+			}
+		} else {
+			throw new Error('EssenceIonAMapComponent.apiKey is undefined!');
 		}
 	}
 
@@ -107,13 +112,14 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 
 	/**
 	 * 动态添加高德地图api
+	 * @returns {Promise<any>}
 	 */
 	addAmapScript(): Promise<any> {
 		return new Promise((resolve, reject) => {
 			const head = document.getElementsByTagName('head')[0],
 				script = document.createElement('script');
 			script.type = 'text/javascript';
-			script.src = `http://webapi.amap.com/maps?v=1.3&key=${this.apiKey}`;
+			script.src = this.AMapAPI;
 			head.appendChild(script);
 			script.onload = () => {
 				resolve();

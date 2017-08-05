@@ -22,7 +22,8 @@ This is ionic custom components.
 	import {EssenceIonicModule} from "essence-ionic";
 	@NgModule({
 	    imports: [
-	        EssenceIonicModule
+	        // 使用essence-ion-amap需要调用initAMapAPI初始化，其中apiKey是高德地图API key，请到官网申请。
+	        EssenceIonicModule.initAMapAPI({apiKey: '92876784ab731cccce8ebd5a8030290f'})
 	    ]
 	})
 	```
@@ -34,13 +35,12 @@ This is ionic custom components.
 1. Use in Template
 
 	```html
-	<essence-ion-amap [options]="amapOpts" (ready)="amapReady($event)" (destroy)="amapDestroy($event)"></essence-ion-amap>
+	<essence-ion-amap (ready)="amapReady($event)" (destroy)="amapDestroy($event)"></essence-ion-amap>
 	```
 
 2. Use in component
 
 	```typescript
-    amapOpts: any; // 初始化地图参数
 
     constructor() {}
 
@@ -80,8 +80,6 @@ This is ionic custom components.
 ### essence-ion-amap
 
 #### Inputs
-
-- `apiKey`（`string`）- （必需）高德地图API Key
 
 - `options`（`?Object`） - 地图初始化参数对象，[参数详情](http://lbs.amap.com/api/javascript-api/reference/map)
 
