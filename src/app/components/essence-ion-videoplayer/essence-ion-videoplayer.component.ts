@@ -5,7 +5,7 @@
  */
 
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
 	selector: 'essence-ion-videoplayer',
@@ -148,7 +148,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 		this.isPan = true;
 		this.pause();
 		if (this.prevPoint) {
-			let deltaX: number = e.deltaX - this.prevPoint.deltaX;
+			const deltaX: number = e.deltaX - this.prevPoint.deltaX;
 			this.videoElem.currentTime += (this.coefficient * deltaX);
 			if (this.videoElem.currentTime > 0 && this.videoElem.currentTime < this.videoElem.duration) {
 				this.caleProgress();
@@ -196,7 +196,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	 */
 	reload(videoElem: HTMLVideoElement) {
 		this.canPlay = false;
-		let id: number = setTimeout(() => {
+		const id: number = setTimeout(() => {
 			this.canPlay = true;
 			videoElem.load();
 			clearTimeout(id);
@@ -209,15 +209,15 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	 */
 	getFormatTime(value: number): string {
 		if (value) {
-			let h: string = parseInt(value / 3600 + '') < 10 ? '0' + parseInt(value / 3600 + '') : '' + parseInt(value / 3600 + ''),
-				m: string = parseInt(value % 3600 / 60 + '') < 10 ? '0' + parseInt(value % 3600 / 60 + '') : '' + parseInt(value % 3600 / 60 + ''),
-				s: string;
+			const h: string = parseInt(value / 3600 + '', 10) < 10 ? '0' + parseInt(value / 3600 + '', 10) : '' + parseInt(value / 3600 + '', 10),
+				m: string = parseInt(value % 3600 / 60 + '', 10) < 10 ? '0' + parseInt(value % 3600 / 60 + '', 10) : '' + parseInt(value % 3600 / 60 + '', 10);
+			let s: string;
 			if (value >= 60) {
-				s = value % 3600 % 60 < 10 ? '0' + parseInt(value % 3600 % 60 + '') : '' + parseInt(value % 3600 % 60 + '');
+				s = value % 3600 % 60 < 10 ? '0' + parseInt(value % 3600 % 60 + '', 10) : '' + parseInt(value % 3600 % 60 + '', 10);
 			} else if (value < 60 && value >= 10) {
-				s = '' + parseInt(value + '');
+				s = '' + parseInt(value + '', 10);
 			} else if (value < 10) {
-				s = '0' + parseInt(value + '');
+				s = '0' + parseInt(value + '', 10);
 			}
 			return `${h}:${m}:${s}`;
 		} else {
