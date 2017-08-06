@@ -3,6 +3,7 @@
  * homepage：http://www.laixiangran.cn
  */
 
-export { EssenceIonicModule } from './essence-ionic.module';
-export { EssenceIonVideoplayerComponent } from './essence-ion-videoplayer/essence-ion-videoplayer.component';
 export { EssenceIonAMapComponent } from './essence-ion-amap/essence-ion-amap.component';
+export { EssenceIonCalendarComponent } from './essence-ion-calendar/essence-ion-calendar.component';
+export { EssenceIonVideoplayerComponent } from './essence-ion-videoplayer/essence-ion-videoplayer.component';
+export { EssenceIonicModule } from './essence-ionic.module';

@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
 	selector: 'essence-ion-calendar',
 	templateUrl: './essence-ion-calendar.component.html',
-	// styleUrls: ['./essence-ion-calendar.component.scss']
+	styleUrls: ['./essence-ion-calendar.component.scss']
 })
 export class EssenceIonCalendarComponent implements OnInit {
 
