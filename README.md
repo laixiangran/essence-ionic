@@ -6,15 +6,15 @@ This is ionic custom components.
 
 1. essence-ion-amap（高德地图）
 
-<img height="100%" src="./src/assets/images/essence-ion-amap.png" />
+	<img style="width: 300px;" src="./src/assets/images/essence-ion-amap.png" />
 
 2. essence-ion-videoplayer（视频播放器）
 
-<img height="100%" src="./src/assets/images/essence-ion-videoplayer.png" />
+	<img style="width: 300px;" src="./src/assets/images/essence-ion-videoplayer.png" />
 
 3. essence-ion-calendar（日历）
 
-<img height="100%" src="./src/assets/images/essence-ion-calendar.png" />
+	<img style="width: 300px;" src="./src/assets/images/essence-ion-calendar.png" />
 
 ## Usage
 
