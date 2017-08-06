@@ -1,7 +1,7 @@
 <div class="essence-ion-calendar">
 	<div class="calendar-header">
-		<div class="today" (click)="backToday()">回到本月</div>
-		<div class="changeDate">
+		<div tappable class="today" (click)="backToday()">回到本月</div>
+		<div tappable class="changeDate">
 			<ion-datetime
 				displayFormat="YYYY-MM"
 				cancelText="取消"
@@ -24,12 +24,14 @@
 		</div>
 		<div class="day">
 			<ul>
-				<li *ngFor="let monthData of calendarData.monthData;"
+				<li tappable *ngFor="let monthData of calendarData.monthData;"
+					(click)="onViewData(monthData.data)"
 					[ngClass]="{disable: isNotSameMonth(monthData.year, monthData.month), currDay: isCurrDay(monthData.year, monthData.month, monthData.day)}"
 					[style.width]="calendarContent.offsetWidth / 7 + 'px'"
 					[style.line-height]="calendarContent.offsetWidth / 7 + 'px'"
 					[style.height]="calendarContent.offsetWidth / 7 + 'px'">
 					<span>{{monthData.day}}</span>
+					<span *ngIf="monthData.data" class="sign"></span>
 				</li>
 			</ul>
 		</div>

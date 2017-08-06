@@ -8,6 +8,8 @@ This is ionic custom components.
 
 2. essence-ion-videoplayer（视频播放器）
 
+3. essence-ion-calendar（日历）
+
 ## Usage
 
 1. Install
@@ -74,6 +76,50 @@ This is ionic custom components.
         console.log($event);
     }
 	```
+	
+### essence-ion-calendar
+
+1. Use in Template
+
+	```html
+	<essence-ion-calendar [schedules]="schedules"
+						  (ready)="onReady()"
+						  (ViewSchedule)="onViewSchedule($event)"
+						  (dateChange)="onDateChange($event)">
+	</essence-ion-calendar>
+	```
+
+2. Use in component
+
+	```typescript
+	schedules: any;
+
+	constructor() {
+		this.schedules = [
+			{
+				date: new Date(),
+				data: {
+					title: '参加会议',
+					address: '公司会议室',
+					content: '讨论考核制度',
+					info: '参会人员包括：张三、李四'
+				}
+			}
+		]
+	}
+
+	onReady() {
+		console.log('日历组件加载完成！');
+	}
+
+	onDateChange($event: Date) {
+		console.log($event);
+	}
+
+	onViewSchedule($event: any) {
+		console.log($event);
+	}
+	```
 
 ## API
 
@@ -126,6 +172,20 @@ This is ionic custom components.
 - `videoPan($event)` - 视频滑动快进/退事件
 
 - `videoError($event)` - 视频播放错误事件
+
+### essence-ion-calendar
+
+#### Inputs
+
+- `schedules`（`?Array<{date: Date, data: any}>`） - 要显示在日历中对应日期的数据
+
+#### Outputs (event)
+
+- `ready($event)` - 日历初始化完成事件，参数$event为当前EssenceIonCalendarComponent实例对象
+
+- `dateChange($event)` - 日期改变事件，参数$event为改变之后的日期
+
+- `viewData($event)` - 查看对应日期的数据
 
 # License
 

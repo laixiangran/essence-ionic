@@ -12,35 +12,40 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class EssenceIonCalendarComponent implements OnInit {
 
-	now: Date; // 当前日期
+	now: Date; // 当前选择的日期
 	currentDate: string;
 	calendarData: any; // 初始化的日历数据
 	minYear: number = 1899; // 最小年限
 	maxYear: number = 2050; // 最大年限
 	weekData: Array<string> = ['日', '一', '二', '三', '四', '五', '六']; // 星期数据
-	initSchedules: Array<any> = null;
+	initSchedules: Array<{date: Date, data: any}> = null;
 
 	@Input()
-	set schedules(schedules: any) {
-		this.initSchedules = schedules;
-		this.initCalendarData(new Date());
+	set schedules(schedules: Array<{date: Date, data: any}>) {
+		if (schedules) {
+			this.initSchedules = schedules;
+			this.caleCurrentDate(new Date());
+			this.initCalendarData(new Date(), !!schedules);
+		}
 	}
 
+	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() dateChange: EventEmitter<any> = new EventEmitter<any>(false);
-	@Output() onAddSchedule: EventEmitter<any> = new EventEmitter<any>(false);
-	@Output() onViewSchedule: EventEmitter<any> = new EventEmitter<any>(false);
-	@Output() onViewAllSchedule: EventEmitter<any> = new EventEmitter<any>(false);
-	@Output() onDeleteSchedule: EventEmitter<any> = new EventEmitter<any>(false);
+	@Output() ViewData: EventEmitter<any> = new EventEmitter<any>(false);
 	// 错误码列表
 	errorCode = {
 		'100': '输入的年份超过了可查询范围，仅支持1900至2050年',
 		'101': '参数输入错误，请查阅文档'
 	};
 
-	constructor() {}
+	constructor() {
+	}
 
 	ngOnInit() {
-		this.initCalendarData(new Date());
+		if (!this.initSchedules) {
+			this.caleCurrentDate(new Date());
+			this.initCalendarData(new Date(), true);
+		}
 	}
 
 	/**
@@ -53,15 +58,39 @@ export class EssenceIonCalendarComponent implements OnInit {
 		this.currentDate = date.getFullYear() + '-' + monthStr;
 	}
 
+
+	/**
+	 * 返回今天
+	 */
+	backToday() {
+		this.caleCurrentDate(new Date());
+	}
+
+	/**
+	 * 日期改变事件
+	 */
+	datetimeChange() {
+		this.initCalendarData(new Date(this.currentDate));
+	}
+
+	/**
+	 * 查看日程详情
+	 * @param data
+	 */
+	onViewData(data: any) {
+		if (data) {
+			this.ViewData.emit(data);
+		}
+	}
+
 	/**
 	 * 初始化日历
-	 * @param now 当前日期
+	 * @param {Date} now 当前选择日期
+	 * @param {boolean} isFirst 是否第一次初始化日历
 	 */
-	initCalendarData(now: Date) {
+	initCalendarData(now: Date, isFirst: boolean = false) {
 		this.now = now;
-		this.caleCurrentDate(this.now);
 		this.calendarData = this.solarCalendar(this.now.getFullYear(), this.now.getMonth());
-
 		// 设置对应日期的日程安排
 		if (this.initSchedules) {
 			this.calendarData.monthData.forEach((monthData: any) => {
@@ -74,8 +103,11 @@ export class EssenceIonCalendarComponent implements OnInit {
 				});
 			});
 		}
-
-		this.dateChange.emit(this.now);
+		if (isFirst) {
+			this.ready.emit(this);
+		} else {
+			this.dateChange.emit(this.now);
+		}
 	}
 
 	/**
@@ -217,20 +249,6 @@ export class EssenceIonCalendarComponent implements OnInit {
 			date1: Date = new Date(year, month - 1, day),
 			date2: Date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		return date1.getTime() === date2.getTime();
-	}
-
-	/**
-	 * 返回今天
-	 */
-	backToday() {
-		this.initCalendarData(new Date());
-	}
-
-	/**
-	 * 日期改变事件
-	 */
-	datetimeChange () {
-		this.initCalendarData(new Date(this.currentDate));
 	}
 }
 
