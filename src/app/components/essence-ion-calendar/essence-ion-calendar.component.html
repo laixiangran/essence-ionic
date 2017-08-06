@@ -1,9 +1,15 @@
 <div class="essence-ion-calendar">
 	<div class="calendar-header">
-		<span style="display: inline-block;">
-			<ion-datetime displayFormat="YYYY-MM" [(ngModel)]="currentDate"></ion-datetime>
-		</span>
-		<button ion-button round outline small (click)="backToday()">回到本月</button>
+		<div class="today" (click)="backToday()">回到本月</div>
+		<div class="changeDate">
+			<ion-datetime
+				displayFormat="YYYY-MM"
+				cancelText="取消"
+				doneText="确定"
+				[(ngModel)]="currentDate"
+				(ionChange)="datetimeChange()">
+			</ion-datetime>
+		</div>
 	</div>
 	<div class="calendar-content" #calendarContent>
 		<div class="week">

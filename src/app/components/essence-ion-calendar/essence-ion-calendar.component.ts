@@ -3,7 +3,7 @@
  * homepage：http://www.laixiangran.cn
  * 日历组件类
  */
-import { Component, EventEmitter, Input, OnInit, Output, ViewChildren } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'essence-ion-calendar',
@@ -15,19 +15,9 @@ export class EssenceIonCalendarComponent implements OnInit {
 	now: Date; // 当前日期
 	currentDate: string;
 	calendarData: any; // 初始化的日历数据
-	isShowYearAndMonth: boolean = false; // 是否显示选择年月视图
-	isShowYearView: boolean = false; // 是否显示年视图
-	isShowMonthView: boolean = false; // 是否显示月视图
-	selectYearText: string; // 年范围文本
-	selectYear: number; // 选中的年
-	selectMonth: number; // 选中的月
-	minTenYear: boolean = false; // 最小10年
-	maxTenYear: boolean = false; // 最大10年
 	minYear: number = 1899; // 最小年限
 	maxYear: number = 2050; // 最大年限
 	weekData: Array<string> = ['日', '一', '二', '三', '四', '五', '六']; // 星期数据
-	monthData: Array<string> = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']; // 月份数据
-	yearData: Array<number> = []; // 当前年所在的十年数据
 	initSchedules: Array<any> = null;
 
 	@Input()
@@ -47,14 +37,20 @@ export class EssenceIonCalendarComponent implements OnInit {
 		'101': '参数输入错误，请查阅文档'
 	};
 
-	constructor() {
-		const month: number = new Date().getMonth() + 1;
-		const monthStr: string = month > 10 ? month + '' : '0' + month;
-		this.currentDate = new Date().getFullYear() + '-' + monthStr;
-	}
+	constructor() {}
 
 	ngOnInit() {
 		this.initCalendarData(new Date());
+	}
+
+	/**
+	 * 计算当前日期
+	 * @param {Date} date
+	 */
+	caleCurrentDate(date: Date) {
+		const month: number = date.getMonth() + 1;
+		const monthStr: string = month > 10 ? month + '' : '0' + month;
+		this.currentDate = date.getFullYear() + '-' + monthStr;
 	}
 
 	/**
@@ -63,8 +59,7 @@ export class EssenceIonCalendarComponent implements OnInit {
 	 */
 	initCalendarData(now: Date) {
 		this.now = now;
-		this.selectYear = this.now.getFullYear();
-		this.selectMonth = this.now.getMonth();
+		this.caleCurrentDate(this.now);
 		this.calendarData = this.solarCalendar(this.now.getFullYear(), this.now.getMonth());
 
 		// 设置对应日期的日程安排
@@ -81,26 +76,6 @@ export class EssenceIonCalendarComponent implements OnInit {
 		}
 
 		this.dateChange.emit(this.now);
-	}
-
-	/**
-	 * 上一个月
-	 */
-	preMonth() {
-		const preYear: number = this.now.getMonth() - 1 < 0 ? this.now.getFullYear() - 1 : this.now.getFullYear(),
-			preMonth: number = this.now.getMonth() - 1 < 0 ? 11 : this.now.getMonth() - 1,
-			preDate: Date = new Date(preYear, preMonth);
-		this.initCalendarData(preDate);
-	}
-
-	/**
-	 * 下一个月
-	 */
-	nextMonth() {
-		const nextYear: number = this.now.getMonth() + 1 > 11 ? this.now.getFullYear() + 1 : this.now.getFullYear(),
-			nextMonth: number = this.now.getMonth() + 1 > 11 ? 0 : this.now.getMonth() + 1,
-			nextDate: Date = new Date(nextYear, nextMonth);
-		this.initCalendarData(nextDate);
 	}
 
 	/**
@@ -252,143 +227,10 @@ export class EssenceIonCalendarComponent implements OnInit {
 	}
 
 	/**
-	 * monthData转换成date
-	 * @param monthData
-	 * @returns {Date}
+	 * 日期改变事件
 	 */
-	toDate(monthData: any): Date {
-		return new Date(monthData.year, monthData.month - 1, monthData.day);
-	}
-
-	/**
-	 * 添加日程安排
-	 * @param monthData
-	 */
-	addSchedule(monthData: any) {
-		this.onAddSchedule.emit(this.toDate(monthData));
-	}
-
-	/**
-	 * 查看日程安排
-	 * @param monthData
-	 * @param schedule
-	 */
-	viewSchedule(monthData: any, schedule: any) {
-		this.onViewSchedule.emit({
-			date: this.toDate(monthData),
-			data: schedule
-		});
-	}
-
-	/**
-	 * 查看所有的日程安排
-	 * @param monthData
-	 */
-	viewAllSchedule(monthData: any) {
-		this.onViewAllSchedule.emit({
-			date: this.toDate(monthData),
-			data: monthData.data
-		});
-	}
-
-	/**
-	 * 删除某个日程
-	 * @param schedule
-	 */
-	deleteSchedule(schedule: any) {
-		this.onDeleteSchedule.emit(schedule);
-	}
-
-	/**
-	 * 切换年月面板
-	 */
-	toggleYearAndMonth() {
-		this.isShowYearAndMonth = !this.isShowYearAndMonth;
-		this.isShowYearView = false;
-		this.isShowMonthView = this.isShowYearAndMonth;
-	}
-
-	/**
-	 * 改变月
-	 * @param month
-	 */
-	changeMonth(month: number) {
-		this.isShowYearAndMonth = false;
-		this.selectMonth = month;
-		this.initCalendarData(new Date(this.selectYear, this.selectMonth));
-	}
-
-	/**
-	 * 改变年
-	 * @param year
-	 */
-	changeYear(year: number) {
-		this.selectYear = year;
-		this.isShowYearView = false;
-		this.isShowMonthView = true;
-	}
-
-	/**
-	 * 显示年视图
-	 * @param year
-	 */
-	showYearView(year: number) {
-		this.isShowYearView = true;
-		this.isShowMonthView = false;
-		this.yearData = this.creatTenYear(year);
-		this.selectYearText = `${this.yearData[0]} - ${this.yearData[9]}`;
-	}
-
-	/**
-	 * 该年是否在年视图显示的十年内
-	 * @param year
-	 * @returns {boolean}
-	 */
-	isInTenYear(year: number): boolean {
-		return year < this.yearData[0] || year > this.yearData[9];
-	}
-
-	/**
-	 * 上十年
-	 */
-	preTenYear() {
-		if (this.yearData[0] > this.minYear + 1) {
-			this.maxTenYear = false;
-			this.yearData = this.creatTenYear(this.yearData[0] - 10);
-			this.selectYearText = `${this.yearData[0]} - ${this.yearData[9]}`;
-			if (this.yearData[0] <= this.minYear + 1) {
-				this.minTenYear = true;
-			}
-		}
-	}
-
-	/**
-	 * 下十年
-	 */
-	nextTenYear() {
-		if (this.yearData[9] < this.maxYear - 1) {
-			this.minTenYear = false;
-			this.yearData = this.creatTenYear(this.yearData[0] + 10);
-			this.selectYearText = `${this.yearData[0]} - ${this.yearData[9]}`;
-			if (this.yearData[9] >= this.maxYear - 1) {
-				this.maxTenYear = true;
-			}
-		}
-	}
-
-	/**
-	 * 根据给定的年创建该年所在的十年数据
-	 * @param year
-	 * @returns {Array<number>}
-	 */
-	creatTenYear(year: number): Array<number> {
-		const tenYear: Array<number> = [];
-		let s_year: number = Math.floor((year / 10)) * 10;
-		for (let i = 0; i < 12; i++) {
-			tenYear.push(s_year);
-			s_year++;
-		}
-		return tenYear;
+	datetimeChange () {
+		this.initCalendarData(new Date(this.currentDate));
 	}
 }
 

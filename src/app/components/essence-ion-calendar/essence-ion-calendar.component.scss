@@ -13,7 +13,22 @@
 	}
 
 	.calendar-header {
+		overflow: hidden;
+		padding: 0 0 5px 6px;
 
+		& > div {
+			height: 40px;
+			line-height: 40px;
+		}
+
+		.today {
+			float: left;
+		}
+
+		.changeDate {
+			position: relative;
+			float: right;
+		}
 	}
 
 	.calendar-content {
