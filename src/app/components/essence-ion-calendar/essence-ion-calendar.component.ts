@@ -95,10 +95,15 @@ export class EssenceIonCalendarComponent implements OnInit {
 		if (this.initSchedules) {
 			this.calendarData.monthData.forEach((monthData: any) => {
 				this.initSchedules.forEach((schedule: any) => {
-					const date1: Date = new Date(monthData.year, monthData.month - 1, monthData.day),
-						date2: Date = new Date(schedule.date.getFullYear(), schedule.date.getMonth(), schedule.date.getDate());
-					if (date1.getTime() === date2.getTime()) {
-						monthData.data = schedule.data;
+					schedule.date = new Date(schedule.date);
+					if (schedule.date.toString() !== 'Invalid Date') {
+						const date1: Date = new Date(monthData.year, monthData.month - 1, monthData.day),
+							date2: Date = new Date(schedule.date.getFullYear(), schedule.date.getMonth(), schedule.date.getDate());
+						if (date1.getTime() === date2.getTime()) {
+							monthData.data = schedule.data;
+						}
+					} else {
+						throw new Error('schedules date is Invalid Date!');
 					}
 				});
 			});
