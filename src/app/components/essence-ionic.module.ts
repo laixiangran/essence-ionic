@@ -25,5 +25,10 @@ const components: any[] = [
 	entryComponents: components,
 	exports: components
 })
-export class EssenceIonicModule {}
+export class EssenceIonicModule {
+	static setAMapKey(config: {apiKey: string, webApiKey: string}) {
+		EssenceIonAMapComponent.webApiKey = config.webApiKey;
+		EssenceIonAMapComponent.apiKey = config.apiKey;
+	};
+}
 

@@ -20,6 +20,8 @@ import 'rxjs/add/operator/catch';
 	providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
+	static apiKey: string;
+	static webApiKey: string;
 	map: any;
 	convertAPI: string;
 	AMapAPI: string;
@@ -34,7 +36,6 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	vertrefresh: number = 10;
 	eAMap: any;
 	@ViewChild('amap') elRef: ElementRef;
-	@Input() apiKey: string;
 	@Input() options: Object;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
@@ -60,7 +61,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${this.apiKey}`;
+		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.webApiKey}`;
+		this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
 		this.initMap();
 	}
 

@@ -13,4 +13,6 @@ www
 config.xml
 gulpfile.js
 ionic.config.json
+platforms/
+plugins/
 
