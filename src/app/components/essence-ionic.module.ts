@@ -25,16 +25,5 @@ const components: any[] = [
 	entryComponents: components,
 	exports: components
 })
-export class EssenceIonicModule {
-
-	static initAMapAPI(config: { apiKey: string }) {
-		const head = document.getElementsByTagName('head')[0],
-			script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.src = `http://webapi.amap.com/maps?v=1.3&key=${config.apiKey}`;
-		head.appendChild(script);
-		EssenceIonAMapComponent.apiKey = config.apiKey;
-		return this;
-	}
-}
+export class EssenceIonicModule {}
 

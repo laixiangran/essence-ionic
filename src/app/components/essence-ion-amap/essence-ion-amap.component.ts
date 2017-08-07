@@ -33,8 +33,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	initCenter: any;
 	vertrefresh: number = 10;
 	eAMap: any;
-	static apiKey: string;
 	@ViewChild('amap') elRef: ElementRef;
+	@Input() apiKey: string;
 	@Input() options: Object;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
@@ -60,21 +60,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		if (EssenceIonAMapComponent.apiKey) {
-			this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.apiKey}`;
-			this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
-			if (window['AMap']) {
-				this.initMap();
-			} else {
-				this.addAmapScript().then(() => {
-					this.initMap();
-				}).catch((err: any) => {
-					throw err;
-				});
-			}
-		} else {
-			throw new Error('EssenceIonAMapComponent.apiKey is undefined!');
-		}
+		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${this.apiKey}`;
+		this.initMap();
 	}
 
 	ngOnDestroy() {
