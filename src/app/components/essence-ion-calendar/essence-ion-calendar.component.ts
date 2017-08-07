@@ -31,7 +31,7 @@ export class EssenceIonCalendarComponent implements OnInit {
 
 	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() dateChange: EventEmitter<any> = new EventEmitter<any>(false);
-	@Output() ViewData: EventEmitter<any> = new EventEmitter<any>(false);
+	@Output() viewData: EventEmitter<any> = new EventEmitter<any>(false);
 	// 错误码列表
 	errorCode = {
 		'100': '输入的年份超过了可查询范围，仅支持1900至2050年',
@@ -78,7 +78,7 @@ export class EssenceIonCalendarComponent implements OnInit {
 	 * @param data
 	 */
 	onViewData(data: any) {
-		this.ViewData.emit(data);
+		this.viewData.emit(data);
 	}
 
 	/**
