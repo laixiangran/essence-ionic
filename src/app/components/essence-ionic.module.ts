@@ -29,6 +29,7 @@ export class EssenceIonicModule {
 	static setAMapKey(config: {apiKey: string, webApiKey: string}) {
 		EssenceIonAMapComponent.webApiKey = config.webApiKey;
 		EssenceIonAMapComponent.apiKey = config.apiKey;
+		return this;
 	};
 }
 
