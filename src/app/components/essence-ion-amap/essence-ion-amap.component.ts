@@ -34,7 +34,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	initZoom: number;
 	initCenter: any;
 	vertrefresh: number = 10;
-	eAMap: any;
+	eAMap: any = window['AMap'];
 	@ViewChild('amap') elRef: ElementRef;
 	@Input() options: Object;
 	@Input() showCurrentLocation: boolean = false;
@@ -61,9 +61,13 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.webApiKey}`;
-		this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
-		this.initMap();
+		if (EssenceIonAMapComponent.webApiKey && EssenceIonAMapComponent.apiKey) {
+			this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.webApiKey}`;
+			this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
+			this.initMap();
+		} else {
+			throw new Error('webApiKey or apiKey is undefined!');
+		}
 	}
 
 	ngOnDestroy() {
@@ -77,7 +81,6 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * 初始化地图
 	 */
 	initMap() {
-		this.eAMap = window['AMap'];
 		this.map = new this.eAMap.Map(this.elRef.nativeElement, this.options);
 		this.trafficTileLayer = new this.eAMap.TileLayer.Traffic({
 			map: this.map,
