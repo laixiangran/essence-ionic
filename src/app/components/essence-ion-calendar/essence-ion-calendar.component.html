@@ -25,7 +25,7 @@
 		<div class="day">
 			<ul>
 				<li tappable *ngFor="let monthData of calendarData.monthData;"
-					(click)="onViewData(monthData.data)"
+					(click)="onViewData(monthData)"
 					[ngClass]="{disable: isNotSameMonth(monthData.year, monthData.month), currDay: isCurrDay(monthData.year, monthData.month, monthData.day)}"
 					[style.width]="calendarContent.offsetWidth / 7 + 'px'"
 					[style.line-height]="calendarContent.offsetWidth / 7 + 'px'"
