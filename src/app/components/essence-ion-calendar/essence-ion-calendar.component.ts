@@ -78,9 +78,7 @@ export class EssenceIonCalendarComponent implements OnInit {
 	 * @param data
 	 */
 	onViewData(data: any) {
-		if (data) {
-			this.ViewData.emit(data);
-		}
+		this.ViewData.emit(data);
 	}
 
 	/**
