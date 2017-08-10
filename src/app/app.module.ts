@@ -25,10 +25,7 @@ import { CalendarPage } from './pages/calendar/calendar';
 			tabsPlacement: 'bottom',
 			pageTransition: 'ios'
 		}),
-		EssenceIonicModule.setAMapKey({
-			apiKey: '92876784ab731cccce8ebd5a8030290f',
-			webApiKey: '0df36377c23e75585d4ed4fcb4baf807'
-		})
+		EssenceIonicModule
 	],
 	declarations: [
 		AppComponent,

@@ -4,7 +4,7 @@
 
 # 1.1.1（2017-08-05）
 
-- 新增 essence-ion-amap：新增EssenceIonicModule.setAMapKey({apiKey: <申请的API key>, webApiKey: <申请的Web key>})方法
+- 新增 essence-ion-amap：新增apiKey，webApiKey输入属性
 
 # 1.1.0（2017-08-03）
 

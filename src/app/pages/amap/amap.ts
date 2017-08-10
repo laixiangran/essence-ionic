@@ -13,6 +13,8 @@ import { EssenceIonAMapComponent } from '../../components/essence-ion-amap/essen
 export class AmapPage {
 	amapComponent: EssenceIonAMapComponent; // 当前地图控件对象
 	amap: any; // 当前地图对象
+	apiKey: string =  '92876784ab731cccce8ebd5a8030290f';
+	webApiKey: string = '0df36377c23e75585d4ed4fcb4baf807';
 
 	constructor() {
 	}

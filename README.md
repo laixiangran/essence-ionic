@@ -30,11 +30,7 @@ This is ionic custom components.
 	import {EssenceIonicModule} from "essence-ionic";
 	@NgModule({
 	    imports: [
-	        // 如果使用essence-ion-amap组件，需要调用setAMapKey初始化API key，相关的key请到高德地图官网申请
-            EssenceIonicModule.setAMapKey({
-                apiKey: <申请的API key>,
-                webApiKey: <申请的Web key>
-            })
+            EssenceIonicModule
 	    ]
 	})
 	```

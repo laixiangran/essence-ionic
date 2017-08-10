@@ -54,6 +54,16 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 		}
 	};
 
+	@Input()
+	set webApiKey(value: string) {
+		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${value}`;
+	};
+
+	@Input()
+	set apiKey(value: string) {
+		this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${value}`;
+	};
+
 	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() destroy: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() location: EventEmitter<any> = new EventEmitter<any>(false);
@@ -61,13 +71,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
-		if (EssenceIonAMapComponent.webApiKey && EssenceIonAMapComponent.apiKey) {
-			this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${EssenceIonAMapComponent.webApiKey}`;
-			this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${EssenceIonAMapComponent.apiKey}`;
-			this.initMap();
-		} else {
-			throw new Error('webApiKey or apiKey is undefined!');
-		}
+		this.initMap();
 	}
 
 	ngOnDestroy() {
