@@ -17,15 +17,19 @@
 			<source [src]="videoUrl" type="video/mp4"/>
 		</video>
 		<div *ngIf="video.paused && video.networkState != 3 && !isPan" (tap)="playOrPause()">
-			<span class="fa" [ngClass]="{'fa-repeat': video.ended, 'fa-play-circle-o': !video.ended}"></span>
+			<span>
+				<ion-icon name="play"></ion-icon>
+			</span>
 			<span class="time">{{getFormatTime(video.currentTime)}}/{{getFormatTime(video.duration)}}</span>
 		</div>
 		<span *ngIf="isPan" class="panTime">{{getFormatTime(video.currentTime)}}</span>
-		<div *ngIf="!canPlay && !isPan" (tap)="playOrPause()">
-			<span class="fa fa-circle-o-notch fa-spin loading"></span>
-		</div>
+		<!--<div *ngIf="!canPlay && !isPan" (tap)="playOrPause()">-->
+			<!--<span class="fa fa-circle-o-notch fa-spin loading"></span>-->
+		<!--</div>-->
 		<div *ngIf="video.networkState === 3 && canPlay" (tap)="reload(video)">
-			<span class="fa fa-refresh"></span>
+			<span>
+				<ion-icon name="refresh"></ion-icon>
+			</span>
 			<span class="reload_info">视频加载失败！</span>
 		</div>
 	</div>

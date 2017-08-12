@@ -32,8 +32,8 @@ $playBtnSize: 40px;
                 position: absolute;
                 left: 50%;
                 top: 50%;
-                margin-left: -$playBtnSize/2;
-                margin-top: -$playBtnSize/2-10;
+                margin-left: -12px;
+                margin-top: -34px;
                 color: #E2E2E2;
                 transition: color 0.8s;
 
@@ -44,7 +44,7 @@ $playBtnSize: 40px;
                 }
 
                 &.reload_info {
-                    margin-left: -42px;
+                    margin-left: -38px;
                     margin-top: 10px;
                     font-size: 12px;
                 }

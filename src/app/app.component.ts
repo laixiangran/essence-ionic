@@ -11,7 +11,7 @@ import { CalendarPage } from './pages/calendar/calendar';
 export class AppComponent {
 	@ViewChild(Nav) nav: Nav;
 
-	rootPage = AmapPage;
+	rootPage = HomePage;
 
 	pages: any[];
 
