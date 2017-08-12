@@ -1,3 +1,7 @@
+# 1.2.1（2017-08-12）
+
+- 重构 essence-ion-videoplayer：：替换播放、失败操作的图标
+
 # 1.2.0（2017-08-06）
 
 - 新增 essence-ion-calendar：简单的日历组件
