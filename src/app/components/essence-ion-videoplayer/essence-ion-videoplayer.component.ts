@@ -196,7 +196,7 @@ export class EssenceIonVideoplayerComponent implements OnInit {
 	 */
 	reload(videoElem: HTMLVideoElement) {
 		this.canPlay = false;
-		const id: number = setTimeout(() => {
+		const id: any = setTimeout(() => {
 			this.canPlay = true;
 			videoElem.load();
 			clearTimeout(id);
