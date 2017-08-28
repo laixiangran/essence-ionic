@@ -37,6 +37,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	eAMap: any = window['AMap'];
 	@ViewChild('amap') elRef: ElementRef;
 	@Input() options: Object;
+	@Input() isShowMapToolbar: boolean = true;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
 

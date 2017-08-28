@@ -139,6 +139,8 @@ This is ionic custom components.
 
 - `showCurrentLocation`（`?boolean=false`） - 是否显示定位按钮，true为显示
 
+- `isShowMapToolbar`（`?boolean=true`） - 是否显示左下角地图工具栏，true为显示
+
 - `showLocationMarker`（`?boolean=true`） - 是否显示定位之后的图标，true为显示
 
 - `showTraffic`（`?boolean=false`） - 是否加载实时交通图层，true为加载

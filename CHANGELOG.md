@@ -1,3 +1,7 @@
+# 1.2.2（2017-08-28）
+
+- 新增 essence-ion-amap：新增isShowMapToolbar输入属性
+
 # 1.2.1（2017-08-12）
 
 - 重构 essence-ion-videoplayer：：替换播放、失败操作的图标

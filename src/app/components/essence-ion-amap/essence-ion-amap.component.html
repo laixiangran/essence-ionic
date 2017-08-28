@@ -1,6 +1,6 @@
 <div class="essence-ion-amap">
 	<div class="amap" #amap></div>
-	<div class="amap_toolbar">
+	<div *ngIf="isShowMapToolbar" class="amap_toolbar">
 		<div class="toolbar full_btn" (click)="fullMap()">
 			<div class="icon_div">
 				<ion-icon name="md-globe"></ion-icon>
