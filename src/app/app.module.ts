@@ -1,6 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { AppComponent } from './app.component';
@@ -10,11 +9,12 @@ import { AmapPage } from './pages/amap/amap';
 import { VideoplayerPage } from './pages/videoplayer/videoplayer';
 import { EssenceIonicModule } from './components/essence-ionic.module';
 import { CalendarPage } from './pages/calendar/calendar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
 	imports: [
 		BrowserModule,
-		HttpModule,
+		HttpClientModule,
 		IonicModule.forRoot(AppComponent, {
 			mode: 'ios',
 			iconMode: 'ios',

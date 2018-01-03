@@ -3,10 +3,11 @@
  * homepage：http://www.laixiangran.cn
  * 高德地图组件类
  */
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+
 declare let AMap: any;
 
 import { Component, OnInit, OnDestroy, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { EssenceIonAMapTransformService } from './essence-ion-amap-transform.service';
 import { Observable } from 'rxjs/Observable';
@@ -69,7 +70,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	@Output() destroy: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() location: EventEmitter<any> = new EventEmitter<any>(false);
 
-	constructor(public http: Http, public transformService: EssenceIonAMapTransformService) {}
+	constructor(public http: HttpClient, public transformService: EssenceIonAMapTransformService) {}
 
 	ngOnInit() {
 		this.initMap();
@@ -306,14 +307,11 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	 * @returns {Observable<R>}
 	 */
 	private getCoord(url: string): Observable<any> {
-		const headers: Headers = new Headers();
-		const opts: RequestOptions = new RequestOptions();
-		headers.append('Content-Type', 'application/json');
-		opts.headers = headers;
-		return this.http.get(url, opts).map((res: Response) => {
-			return res.json()
-		}).catch((error: Response) => {
-			return Observable.throw(error.json().error || 'Server Error');
+		const headers: HttpHeaders = new HttpHeaders({
+			'Content-Type': 'application/json'
+		}), options = {headers: headers};
+		return this.http.get(url, options).catch((error: HttpErrorResponse) => {
+			return Observable.throw(error || 'Server Error');
 		});
 	}
 }

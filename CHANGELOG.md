@@ -1,3 +1,7 @@
+# 2.0.0（2018-01-03）
+
+- 使用@angular/common/http替换@angular/http
+
 # 1.2.2（2017-08-28）
 
 - 新增 essence-ion-amap：新增isShowMapToolbar输入属性
