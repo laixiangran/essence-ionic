@@ -1,3 +1,7 @@
+# 5.0.0（2018-04-24）
+
+- 升级angular到5.0.0
+
 # 2.0.0（2018-01-03）
 
 - 使用@angular/common/http替换@angular/http
