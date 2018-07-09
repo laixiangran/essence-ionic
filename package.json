@@ -1,68 +1,117 @@
 {
-	"name": "essence-ionic",
-	"version": "5.0.0",
-	"description": "This is ionic custom components.",
-	"keywords": [
-		"angular",
-		"ionic",
-		"amap",
-		"videoplayer",
-		"laixiangran"
-	],
-	"homepage": "https://github.com/laixiangran/essence-ionic#readme",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/laixiangran/essence-ionic.git"
-	},
-	"author": {
-		"name": "赖祥燃",
-		"email": "laixiangran@163.com",
-		"bolg": "http://www.cnblogs.com/laixiangran",
-		"homepage": "http://www.laixiangran.cn"
-	},
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/laixiangran/essence-ionic/issues"
-	},
-	"scripts": {
-		"release": "gulp prepublish && ngc -p tsconfig-publish.json && npm publish",
-		"start": "gulp delStyleUrls && ionic-app-scripts serve",
-		"add": "ionic cordova platform add android",
-		"resources": "ionic cordova resources android",
-		"device": "ionic cordova run android",
-		"build": "ionic cordova build android --release --prod"
-	},
-	"module": "dist/index.js",
-	"typings": "dist/index.d.ts",
-	"dependencies": {},
-	"devDependencies": {
-		"@angular/common": "^5.0.0",
-		"@angular/compiler": "^5.0.0",
-		"@angular/compiler-cli": "^5.0.0",
-		"@angular/core": "^5.0.0",
-		"@angular/forms": "^5.0.0",
-		"@angular/platform-browser": "^5.0.0",
-		"@angular/platform-browser-dynamic": "^5.0.0",
-		"@ionic-native/core": "^4.0.0",
-		"@ionic/app-scripts": "^3.1.7",
-		"codelyzer": "^4.0.1",
-		"del": "^2.2.2",
-		"gulp": "^3.9.1",
-		"gulp-clean": "^0.3.2",
-		"gulp-if": "^2.0.2",
-		"gulp-inline-ng2-template": "^4.0.0",
-		"gulp-rename": "^1.2.2",
-		"gulp-replace": "^0.6.1",
-		"gulp-sass": "^3.1.0",
-		"ionic-angular": "^3.9.2",
-		"ionicons": "^3.0.0",
-		"ionic": "3.19.1",
-		"rxjs": "^5.5.2",
-		"stylelint": "^7.12.0",
-		"stylelint-scss": "^1.5.0",
-		"sw-toolbox": "^3.6.0",
-		"tslint": "^5.7.0",
-		"typescript": "2.4.2",
-		"zone.js": "^0.8.18"
-	}
+  "name": "essence-ionic",
+  "version": "5.0.0",
+  "description": "自定义的Ionic组件",
+  "keywords": [
+    "angular",
+    "ionic",
+    "amap",
+    "videoplayer",
+    "laixiangran"
+  ],
+  "homepage": "https://github.com/laixiangran/essence-ionic#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/laixiangran/essence-ionic.git"
+  },
+  "author": {
+    "name": "赖祥燃",
+    "email": "laixiangran@163.com",
+    "bolg": "http://www.cnblogs.com/laixiangran",
+    "homepage": "http://www.laixiangran.cn"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/laixiangran/essence-ionic/issues"
+  },
+  "scripts": {
+    "release": "gulp prepublish && ngc -p tsconfig-publish.json && npm publish",
+    "start": "gulp delStyleUrls && ionic-app-scripts serve",
+    "add": "ionic cordova platform add android",
+    "resources": "ionic cordova resources android",
+    "device": "ionic cordova run android",
+    "build": "ionic cordova build android --release --prod"
+  },
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "dependencies": {
+    "@angular/common": "^5.2.11",
+    "@angular/compiler": "^5.2.11",
+    "@angular/compiler-cli": "^5.2.11",
+    "@angular/core": "^5.2.11",
+    "@angular/forms": "^5.2.11",
+    "@angular/platform-browser": "^5.2.11",
+    "@angular/platform-browser-dynamic": "^5.2.11",
+    "@ionic-native/core": "^4.9.0",
+    "@ionic-native/splash-screen": "^4.9.0",
+    "@ionic/app-scripts": "^3.1.10",
+    "codelyzer": "^4.4.2",
+    "cordova-android": "6.3.0",
+    "cordova-plugin-bd-geolocation": "^8.0.1",
+    "cordova-plugin-console": "^1.1.0",
+    "cordova-plugin-crosswalk-webview": "^2.4.0",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "gulp-inline-ng2-template": "^4.1.0",
+    "gulp-rename": "^1.3.0",
+    "gulp-sass": "^3.2.1",
+    "ionic-plugin-keyboard": "^2.2.1",
+    "rxjs": "^5.5.11",
+    "tslint": "^5.10.0",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/platform-browser": "^5.0.0",
+    "@angular/platform-browser-dynamic": "^5.0.0",
+    "@ionic-native/core": "^4.0.0",
+    "@ionic/app-scripts": "^3.1.7",
+    "codelyzer": "^4.0.1",
+    "cordova-android": "6.3.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-if": "^2.0.2",
+    "gulp-inline-ng2-template": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-sass": "^3.1.0",
+    "ionic": "3.20.0",
+    "ionic-angular": "^3.9.2",
+    "ionicons": "^3.0.0",
+    "rxjs": "^5.5.2",
+    "stylelint": "^7.12.0",
+    "stylelint-scss": "^1.5.0",
+    "sw-toolbox": "^3.6.0",
+    "tslint": "^5.7.0",
+    "typescript": "2.4.2",
+    "zone.js": "^0.8.18"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-console": {},
+      "cordova-plugin-whitelist": {},
+      "ionic-plugin-keyboard": {},
+      "cordova-plugin-crosswalk-webview": {
+        "XWALK_VERSION": "23+",
+        "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
+        "XWALK_COMMANDLINE": "--disable-pull-to-refresh-effect",
+        "XWALK_MODE": "embedded",
+        "XWALK_MULTIPLEAPK": "true"
+      },
+      "cordova-plugin-bd-geolocation": {
+        "API_KEY": "F0c645f961aa0cdae874b2073d55f3a5"
+      },
+      "cordova-plugin-splashscreen": {}
+    }
+  }
 }

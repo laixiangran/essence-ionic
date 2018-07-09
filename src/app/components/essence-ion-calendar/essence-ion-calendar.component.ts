@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
 	selector: 'essence-ion-calendar',
 	templateUrl: './essence-ion-calendar.component.html',
-	styleUrls: ['./essence-ion-calendar.component.scss']
 })
 export class EssenceIonCalendarComponent implements OnInit {
 
@@ -18,10 +17,10 @@ export class EssenceIonCalendarComponent implements OnInit {
 	minYear: number = 1899; // 最小年限
 	maxYear: number = 2050; // 最大年限
 	weekData: Array<string> = ['日', '一', '二', '三', '四', '五', '六']; // 星期数据
-	initSchedules: Array<{date: Date, data: any}> = null;
+	initSchedules: Array<{ date: Date, data: any }> = null;
 
 	@Input()
-	set schedules(schedules: Array<{date: Date, data: any}>) {
+	set schedules(schedules: Array<{ date: Date, data: any }>) {
 		if (schedules) {
 			this.initSchedules = schedules;
 			this.caleCurrentDate(new Date());
@@ -32,6 +31,7 @@ export class EssenceIonCalendarComponent implements OnInit {
 	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() dateChange: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() viewData: EventEmitter<any> = new EventEmitter<any>(false);
+
 	// 错误码列表
 	errorCode = {
 		'100': '输入的年份超过了可查询范围，仅支持1900至2050年',

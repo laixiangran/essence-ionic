@@ -17,7 +17,6 @@ import 'rxjs/add/operator/catch';
 @Component({
 	selector: 'essence-ion-amap',
 	templateUrl: './essence-ion-amap.component.html',
-	styleUrls: ['./essence-ion-amap.component.scss'],
 	providers: [EssenceIonAMapTransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {

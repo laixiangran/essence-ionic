@@ -1,6 +1,6 @@
 # essence-ionic
 
-This is ionic custom components.
+自定义的Ionic组件
 
 ## Introduce
 
@@ -27,7 +27,7 @@ This is ionic custom components.
 2. Add the EssenceIonicModule
 
 	```typescript
-	import {EssenceIonicModule} from "essence-ionic";
+	import { EssenceIonicModule } from "essence-ionic";
 	@NgModule({
 	    imports: [
             EssenceIonicModule
@@ -39,7 +39,7 @@ This is ionic custom components.
 
 ### essence-ion-amap
 
-**需求在index.html引入高德地图API：<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=你申请的API key"></script>**
+**在`index.html`引入高德地图API：`<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=你申请的API key"></script>`**
 
 1. Use in Template
 
