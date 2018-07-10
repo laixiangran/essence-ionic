@@ -10,7 +10,7 @@
 		"sourceMap": true,
 		"declaration": true,
 		"rootDir": "aot",
-		"outDir": "dist",
+		"outDir": "dest",
 		"lib": [
 			"es6",
 			"dom"

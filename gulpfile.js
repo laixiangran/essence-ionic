@@ -14,7 +14,7 @@ var replace = require('gulp-replace');
 
 var config = {
     src: './src/app/components',
-    dest: './dist',
+    dest: './dest',
     aot: './aot'
 };
 
@@ -24,11 +24,11 @@ var components = [
     'essence-ion-videoplayer'
 ];
 
-gulp.task('clean:dist', function () {
+gulp.task('clean:dest', function () {
     return del.sync(config.dest, config.aot);
 });
 
-gulp.task('copy:src', ['clean:dist'], function () {
+gulp.task('copy:src', ['clean:dest'], function () {
     return gulp.src([config.src + '/**/*.*'])
         .pipe(gulpif(/.+\.scss/g, sass({outputStyle: 'compressed'}).on('error', sass.logError)))
         .pipe(rename(function (path) {
@@ -39,14 +39,14 @@ gulp.task('copy:src', ['clean:dist'], function () {
         .pipe(gulp.dest(config.aot));
 });
 
-gulp.task('ng2:inline', ['copy:src'], function () {
+gulp.task('ng2:inline', function () {
     return gulp.src([config.aot + '/**/*.ts'])
         .pipe(inlineNg2Template({useRelativePaths: true, target: 'es5'}))
         .pipe(gulp.dest(config.aot + '/'));
 });
 
-gulp.task('prepublish', function (cb) {
-    runSequence(['clean:dist', 'copy:src', 'addStyleUrls', 'ng2:inline'], cb);
+gulp.task('prepublish', ['clean:dest', 'copy:src'], function (cb) {
+    runSequence(['addStyleUrls', 'ng2:inline'], cb);
 });
 
 gulp.task('delStyleUrls', function () {
@@ -69,7 +69,7 @@ gulp.task('addStyleUrls', function () {
             styleText = 'templateUrl: \'\./' + c + '.component.html\'',
             styleText2 = 'styleUrls: [\'\./' + c + '.component.scss\']';
         gulp.src([cUrl])
-            .pipe(replace(styleText, styleText2 + ',' + styleText))
+            .pipe(replace(styleText, styleText2 + ',\n' + styleText))
             .pipe(gulp.dest(src));
     });
 });
