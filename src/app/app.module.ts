@@ -1,13 +1,11 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-
 import { AppComponent } from './app.component';
-// page
 import { HomePage } from './pages/home/home';
 import { AmapPage } from './pages/amap/amap';
 import { VideoplayerPage } from './pages/videoplayer/videoplayer';
-import { EssenceIonicModule } from './components/essence-ionic.module';
+import { EssenceIonicModule } from './components';
 import { CalendarPage } from './pages/calendar/calendar';
 import { HttpClientModule } from '@angular/common/http';
 

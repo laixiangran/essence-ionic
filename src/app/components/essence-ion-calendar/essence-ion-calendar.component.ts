@@ -4,39 +4,37 @@
  * 日历组件类
  */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Schedule } from './models/schedule.model';
 
 @Component({
 	selector: 'essence-ion-calendar',
 	templateUrl: './essence-ion-calendar.component.html',
 })
 export class EssenceIonCalendarComponent implements OnInit {
-
-	now: Date; // 当前选择的日期
-	currentDate: string;
-	calendarData: any; // 初始化的日历数据
-	minYear: number = 1899; // 最小年限
-	maxYear: number = 2050; // 最大年限
-	weekData: Array<string> = ['日', '一', '二', '三', '四', '五', '六']; // 星期数据
-	initSchedules: Array<{ date: Date, data: any }> = null;
-
 	@Input()
-	set schedules(schedules: Array<{ date: Date, data: any }>) {
+	set schedules(schedules: Schedule[]) {
 		if (schedules) {
 			this.initSchedules = schedules;
 			this.caleCurrentDate(new Date());
 			this.initCalendarData(new Date(), !!schedules);
 		}
 	}
-
 	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() dateChange: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() viewData: EventEmitter<any> = new EventEmitter<any>(false);
 
-	// 错误码列表
-	errorCode = {
+	private now: Date; // 当前选择的日期
+	private minYear: number = 1899; // 最小年限
+	private maxYear: number = 2050; // 最大年限
+	private errorCode = { // 错误码列表
 		'100': '输入的年份超过了可查询范围，仅支持1900至2050年',
 		'101': '参数输入错误，请查阅文档'
 	};
+
+	weekData: Array<string> = ['日', '一', '二', '三', '四', '五', '六']; // 星期数据
+	initSchedules: Schedule[] = null; // 初始日程信息
+	calendarData: any; // 初始化的日历数据
+	currentDate: string; // 当前日期
 
 	constructor() {
 	}

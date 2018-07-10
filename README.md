@@ -87,8 +87,8 @@
 
 	```html
 	<essence-ion-calendar [schedules]="schedules"
-						  (ready)="onReady()"
-						  (ViewSchedule)="onViewSchedule($event)"
+						  (ready)="onReady($event)"
+						  (viewData)="onViewSchedule($event)"
 						  (dateChange)="onDateChange($event)">
 	</essence-ion-calendar>
 	```
@@ -96,7 +96,7 @@
 2. Use in component
 
 	```typescript
-	schedules: any;
+	schedules: Schedule[];
 
 	constructor() {
 		this.schedules = [

@@ -9,11 +9,15 @@ import { IonicModule } from 'ionic-angular';
 import { EssenceIonAMapComponent } from './essence-ion-amap/essence-ion-amap.component';
 import { EssenceIonVideoplayerComponent } from './essence-ion-videoplayer/essence-ion-videoplayer.component';
 import { EssenceIonCalendarComponent } from './essence-ion-calendar/essence-ion-calendar.component';
+import { EssenceIonMediaComponent } from './essence-ion-media/essence-ion-media.component';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { MediaCapture } from '@ionic-native/media-capture';
 
 const components: any[] = [
 	EssenceIonVideoplayerComponent,
 	EssenceIonAMapComponent,
-	EssenceIonCalendarComponent
+	EssenceIonCalendarComponent,
+	EssenceIonMediaComponent
 ];
 
 @NgModule({
@@ -23,7 +27,11 @@ const components: any[] = [
 	],
 	declarations: components,
 	entryComponents: components,
-	exports: components
+	exports: components,
+	providers: [
+		MediaCapture,
+		ImagePicker
+	]
 })
 export class EssenceIonicModule {
 }

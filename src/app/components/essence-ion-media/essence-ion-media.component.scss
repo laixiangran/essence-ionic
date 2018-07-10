@@ -1,0 +1,41 @@
+.essence-ion-media {
+    $boxSize: 80px;
+
+    ul, li {
+        padding: 0;
+        margin: 0;
+    }
+
+    ul {
+        list-style: none;
+        text-align: justify;
+
+        li {
+            display: inline-block;
+            width: $boxSize;
+            height: $boxSize;
+            overflow: hidden;
+            text-align: center;
+            vertical-align: top;
+            margin-bottom: 5px;
+            font-size: 0;
+
+            &.add {
+                line-height: $boxSize;
+                font-size: $boxSize / 2 + 20px;
+                background-color: #F1F1F1;
+                color: #8F8F8F;
+                padding-top: 5px;
+            }
+
+            &.fix {
+                height: 0;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

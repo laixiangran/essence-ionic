@@ -1,0 +1,15 @@
+<div class="essence-ion-media" #essenceIonMedia>
+	<ul>
+		<ng-container *ngFor="let media of medias;">
+			<li tappable>
+				<img [src]="media.url">
+			</li>
+		</ng-container>
+		<li tappable class="add" #addLi (click)="addMedia()">
+			<ion-icon name="add"></ion-icon>
+		</li>
+		<ng-container *ngFor="let fix of fixLis;">
+			<li class="fix">{{fix}}</li>
+		</ng-container>
+	</ul>
+</div>

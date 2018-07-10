@@ -4,7 +4,7 @@
  */
 
 import { Component } from '@angular/core';
-import { EssenceIonAMapComponent } from '../../components/essence-ion-amap/essence-ion-amap.component';
+import { EssenceIonAMapComponent } from '../../components';
 
 @Component({
 	selector: 'page-amap',

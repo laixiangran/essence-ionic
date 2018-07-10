@@ -3,13 +3,12 @@
  * homepage：http://www.laixiangran.cn
  * 高德地图组件类
  */
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 declare let AMap: any;
 
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, OnDestroy, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
-
-import { EssenceIonAMapTransformService } from './essence-ion-amap-transform.service';
+import { TransformService } from './services/transform.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -17,11 +16,10 @@ import 'rxjs/add/operator/catch';
 @Component({
 	selector: 'essence-ion-amap',
 	templateUrl: './essence-ion-amap.component.html',
-	providers: [EssenceIonAMapTransformService]
+	providers: [TransformService]
 })
 export class EssenceIonAMapComponent implements OnInit, OnDestroy {
-	static apiKey: string;
-	static webApiKey: string;
+	@ViewChild('amap') elRef: ElementRef;
 	map: any;
 	convertAPI: string;
 	AMapAPI: string;
@@ -35,12 +33,11 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	initCenter: any;
 	vertrefresh: number = 10;
 	eAMap: any = window['AMap'];
-	@ViewChild('amap') elRef: ElementRef;
+
 	@Input() options: Object;
 	@Input() isShowMapToolbar: boolean = true;
 	@Input() showCurrentLocation: boolean = false;
 	@Input() showLocationMarker: boolean = true;
-
 	@Input()
 	set showTraffic(value: boolean) {
 		this.isShowTraffic = value;
@@ -54,22 +51,20 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 			}
 		}
 	};
-
 	@Input()
 	set webApiKey(value: string) {
 		this.convertAPI = `http://restapi.amap.com/v3/assistant/coordinate/convert?key=${value}`;
 	};
-
 	@Input()
 	set apiKey(value: string) {
 		this.AMapAPI = `http://webapi.amap.com/maps?v=1.3&key=${value}`;
 	};
-
 	@Output() ready: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() destroy: EventEmitter<any> = new EventEmitter<any>(false);
 	@Output() location: EventEmitter<any> = new EventEmitter<any>(false);
 
-	constructor(public http: HttpClient, public transformService: EssenceIonAMapTransformService) {}
+	constructor(public http: HttpClient,
+				public transformService: TransformService) {}
 
 	ngOnInit() {
 		this.initMap();
@@ -139,10 +134,8 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 
 	/**
 	 * 设置地图范围
-	 *
 	 * @param {number[]} southWest
 	 * @param {number[]} northEast
-	 *
 	 * @memberof EssenceNg2AMapComponent
 	 */
 	setBounds(southWest: number[], northEast: number[]) {
@@ -252,7 +245,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 				timeout: 27000            // 超时时间
 			};
 			navigator.geolocation.getCurrentPosition((position: Position) => {
-				const currLocation: any = this.transformService.gcj2wgs(position.coords.latitude, position.coords.longitude);
+				const currLocation: any = this.transformService.gcj2wgs(position.coords.longitude, position.coords.latitude);
 				this.tempLocation = {
 					x: currLocation.lng,
 					y: currLocation.lat
@@ -303,7 +296,7 @@ export class EssenceIonAMapComponent implements OnInit, OnDestroy {
 	/**
 	 * 获取转换结果
 	 * @param url
-	 * @returns {Observable<R>}
+	 * @returns {Observable<any>}
 	 */
 	private getCoord(url: string): Observable<any> {
 		const headers: HttpHeaders = new HttpHeaders({

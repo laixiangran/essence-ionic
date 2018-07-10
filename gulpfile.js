@@ -21,7 +21,8 @@ var config = {
 var components = [
     'essence-ion-amap',
     'essence-ion-calendar',
-    'essence-ion-videoplayer'
+    'essence-ion-videoplayer',
+    'essence-ion-media'
 ];
 
 gulp.task('clean:dest', function () {

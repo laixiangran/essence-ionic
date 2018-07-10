@@ -4,7 +4,7 @@
  */
 
 import { Component } from '@angular/core';
-import { EssenceIonCalendarComponent } from '../../components/essence-ion-calendar/essence-ion-calendar.component';
+import { EssenceIonCalendarComponent, Schedule } from '../../components';
 
 @Component({
 	selector: 'page-calendar',
@@ -12,7 +12,7 @@ import { EssenceIonCalendarComponent } from '../../components/essence-ion-calend
 })
 export class CalendarPage {
 
-	schedules: any;
+	schedules: Schedule[];
 
 	constructor() {
 		this.schedules = [

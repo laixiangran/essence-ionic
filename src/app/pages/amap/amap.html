@@ -4,7 +4,9 @@
 	</ion-navbar>
 </ion-header>
 <ion-content>
-	<essence-ion-amap [apiKey]="apiKey" [webApiKey]="webApiKey"
-			(ready)="amapReady($event)"
-			(destroy)="amapDestroy($event)"></essence-ion-amap>
+	<essence-ion-amap [apiKey]="apiKey"
+	                  [webApiKey]="webApiKey"
+	                  (ready)="amapReady($event)"
+	                  (destroy)="amapDestroy($event)">
+	</essence-ion-amap>
 </ion-content>
